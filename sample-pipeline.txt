@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+
+    environment {
+        // Load AWS credentials
+        AWS_CREDENTIALS = credentials('c30bd715-2441-47d2-8fce-73f9fc4cba3b')
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/kozraf/TFstate_secure'
+            }
+        }
+
+        stage ("terraform init") {
+            steps {
+                sh ("terraform init -reconfigure")
+            }
+        }
+        stage ("Action") {
+            steps {
+                echo "Terraform action is --> ${action}"
+                sh ('terraform ${action}')
+           }
+        }
+
+    }
+}
