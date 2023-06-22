@@ -10,5 +10,5 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: nfs-storage
   nfs:
-    path: /srv/nfs/k8s_pv_jenkins
+    path: /srv/nfs/k8s
     server: 192.168.89.141
