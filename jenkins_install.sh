@@ -1,7 +1,7 @@
 # Create NFS directories
-sudo mkdir -p /srv/nfs/k8s_pv_jenkins
-sudo chown nobody:nogroup /srv/nfs/k8s_pv_jenkins
-sudo chmod 777 /srv/nfs/k8s_pv_jenkins
+sudo mkdir -p /srv/nfs/k8s
+sudo chown nobody:nogroup /srv/nfs/k8s
+sudo chmod 777 /srv/nfs/k8s
 
 
 kubectl create namespace jenkins-ns
