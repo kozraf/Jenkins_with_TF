@@ -6,10 +6,10 @@ sudo chmod 777 /srv/nfs/k8s/jenkins-pv
 
 kubectl create namespace jenkins-ns
 
-kubectl apply -f /home/vagrant/Jenkins_with_TF/jenkins-pv.yaml -n jenkins-ns
-kubectl apply -f /home/vagrant/Jenkins_with_TF/jenkins-pvc.yaml -n jenkins-ns
-kubectl apply -f /home/vagrant/Jenkins_with_TF/jenkins-deployment.yaml -n jenkins-ns
-kubectl apply -f /home/vagrant/Jenkins_with_TF/jenkins-service.yaml -n jenkins-ns
+kubectl apply -f /home/vagrant/RafK8clstr/Jenkins_with_TF/jenkins-pv.yaml -n jenkins-ns
+kubectl apply -f /home/vagrant/RafK8clstr/Jenkins_with_TF/jenkins-pvc.yaml -n jenkins-ns
+kubectl apply -f /home/vagrant/RafK8clstr/Jenkins_with_TF/jenkins-deployment.yaml -n jenkins-ns
+kubectl apply -f /home/vagrant/RafK8clstr/Jenkins_with_TF/jenkins-service.yaml -n jenkins-ns
 
 # Define the animation
 animation="-\|/"
