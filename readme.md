@@ -10,6 +10,12 @@ This repository provides resources and configurations for deploying Jenkins inte
 3. **Shell Script**: A utility to automate the deployment process and provide real-time feedback.
 4. **Sample Jenkins Pipeline**: Illustrates the integration of Jenkins with Terraform and AWS.
 
+## How to test it quickly?
+
+Well - try my https://github.com/kozraf/RafK8clstr which is an 3-node K8 cluster deployed using Vagrant and it will
+allow you to deploy content of this repo using a simple setup.bat file. However - if you want to deploy it on your
+K8 cluster - read further. 
+
 ## Setup and Deployment
 
 1. **Docker Setup**:
@@ -59,7 +65,4 @@ This repository provides resources and configurations for deploying Jenkins inte
 
 Feel free to raise issues or submit pull requests if you find areas of improvement or encounter bugs.
 
-## How to test it quickly?
 
-Well - try my https://github.com/kozraf/RafK8clstr which is an 3-node K8 cluster deployed using Vagrant and it will
-allow you to deploy content of this repo using a simple setup.bat file.
