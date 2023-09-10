@@ -61,5 +61,5 @@ Feel free to raise issues or submit pull requests if you find areas of improveme
 
 ## How to test it quickly?
 
-Well - try my https://github.com/kozraf/RafK8clstr which is an 3-node K8 cluster deployed using Vagrant also has an integration with 
-following repository.
+Well - try my https://github.com/kozraf/RafK8clstr which is an 3-node K8 cluster deployed using Vagrant and it will
+allow you to deploy content of this repo using a simple setup.bat file.
