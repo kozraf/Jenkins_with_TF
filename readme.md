@@ -1,57 +1,50 @@
-# Summary
+Jenkins with Terraform on Kubernetes
+This repository provides resources and configurations for deploying Jenkins integrated with Terraform on a Kubernetes cluster. The deployment utilizes NFS for persistent storage, ensuring data longevity across pod restarts. This Jenkins deployment uses a single job to create a remote backend for Terraform state, offering a straightforward solution to maintain the Terraform state remotely for collaboration.
 
-This is a simple Jenkins with TF deployment. Check Dockerfile to see how docker image is build.
-This Jenkins deployment uses a single jenkins job to create remote backend for TFstate.
+Components
+Dockerfile: Outlines the creation of a custom Jenkins Docker image with Terraform installed. Check the Dockerfile to see the specifics of how the Docker image is built.
+Kubernetes Configurations: Includes deployment (for deploying a Jenkins pod), service (to expose Jenkins on a NodePort for external access), persistent volume (PV) and persistent volume claim (PVC) (for ensuring Jenkins data is stored persistently using NFS), and StorageClass (defining NFS as the storage backend).
+Shell Script: A utility to automate the deployment process and provide real-time feedback.
+Sample Jenkins Pipeline: Illustrates the integration of Jenkins with Terraform and AWS.
+Setup and Deployment
+Docker Setup:
 
-# How create jenkins+ TF for K8?
-
-- prepare Dockerfile (as the one already that exists)
-- install Docker
-- launch
-
+Prepare the Dockerfile (as provided in this repository).
+Install Docker.
+Build the Docker image using the command:
 sudo docker build -t kozraf/jenkins-tf:1.0.5 .
 sudo docker login
 sudo docker push kozraf/jenkins-tf:1.0.5
+Ensure that jenkins-deployment.yaml uses the correct version of your Jenkins Docker image.
+Kubernetes Deployment:
 
-- make sure that jenkins-deployment.yaml uses version of your jenkins Docker image
+Use the provided shell script jenkins_install.sh to automate the deployment process.
+Alternatively, apply the Kubernetes configurations manually using kubectl apply -f <filename>.
+Accessing Jenkins:
 
-# TF state remote backend
-A simple solution to keep TF state for remote backend for collaboration. 
+After deployment, Jenkins can be accessed using any node's IP address and port 30000.
+Retrieve the initial Jenkins admin password using the command provided in the script output.
+Terraform State Remote Backend:
 
-## AWS creds
+A simple solution to store the Terraform state for a remote backend for collaboration.
+AWS Credentials Setup in Jenkins:
 
-1. Install CloudBees AWS Credentials Plugin
-2. Go to credentials and configore new credentials Dashboard -> Manage Jenkins -> and clicking on Global and then Add Credentials, fill AWS access key and secret key and make sure you will capture generated ID of the creds
-Credentials
-3. In pipeline - use following:
+Install the CloudBees AWS Credentials Plugin.
+Configure new credentials in Jenkins by navigating to Dashboard -> Manage Jenkins -> Global and then "Add Credentials". Enter your AWS access key and secret key. Make sure to note the generated ID of the credentials.
+In your Jenkins pipeline, use the following snippet to load AWS credentials:
+environment {
+    // Load AWS credentials
+    AWS_CREDENTIALS = credentials('creds_ID_from_step_2')
+}
+Check the provided Jenkins file for more details.
+Jenkins Pipeline Configuration:
 
-    environment {
-        // Load AWS credentials
-        AWS_CREDENTIALS = credentials('creds_ID_from_step_2')
-    }
-4. Check Jenkins file for more info    
-
-## Outputs
-
-- `bucket_id`: The ID of the created S3 bucket.
-- `bucket_name`: The name of the created S3 bucket.
-- `dynamodb_table_name`: The name of the created DynamoDB table.
-
-These outputs are defined in the `outputs.tf` file.
-
-
-## Jenkins
-
-While creating jenkins pipeline - make sure you choose:
-
-"This project is parameterized"
-
-Name: 
-- action
-
-Choices:
-- plan
-- apply --auto-approve
-- destroy --auto-approve
-- state show (TF resource name goes here)
-- state list
+When creating the Jenkins pipeline, ensure to select "This project is parameterized".
+For the action parameter, provide the following choices:
+plan
+apply --auto-approve
+destroy --auto-approve
+state show (Provide Terraform resource name here)
+state list
+Contributing
+Feel free to raise issues or submit pull requests if you find areas of improvement or encounter bugs.
