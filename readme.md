@@ -58,3 +58,8 @@ This repository provides resources and configurations for deploying Jenkins inte
 ## Contributing
 
 Feel free to raise issues or submit pull requests if you find areas of improvement or encounter bugs.
+
+## How to test it quickly?
+
+Well - try my https://github.com/kozraf/RafK8clstr which is an 3-node K8 cluster deployed using Vagrant also has an integration with 
+following repository.
