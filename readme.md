@@ -1,4 +1,3 @@
-
 # Jenkins with Terraform on Kubernetes
 
 This repository provides resources and configurations for deploying Jenkins integrated with Terraform on a Kubernetes cluster. The deployment utilizes NFS for persistent storage, ensuring data longevity across pod restarts. This Jenkins deployment uses a single job to create a remote backend for Terraform state, offering a straightforward solution to maintain the Terraform state remotely for collaboration.
@@ -41,8 +40,9 @@ K8 cluster - read further.
    - A simple solution to store the Terraform state for a remote backend for collaboration. 
 
 5. **AWS Credentials Setup in Jenkins**:
-   - Install the CloudBees AWS Credentials Plugin.
-   - Configure new credentials in Jenkins by navigating to Dashboard -> Manage Jenkins -> Global and then "Add Credentials". Enter your AWS access key and secret key. Make sure to note the generated ID of the credentials.
+   - Install the AWS Credentials Plugin (https://plugins.jenkins.io/aws-credentials/).
+   - Configure new credentials in Jenkins by navigating to Dashboard -> Manage Jenkins -> Global and then "Add Credentials". Enter your AWS access key and secret key. ID will be generated automatically.
+   - Make sure to note the generated ID of the credentials.
    - In your Jenkins pipeline, use the following snippet to load AWS credentials:
      ```bash
      environment {
@@ -50,16 +50,36 @@ K8 cluster - read further.
          AWS_CREDENTIALS = credentials('creds_ID_from_step_2')
      }
      ```
-   - Check the provided Jenkins file for more details.
+   - Check the provided Jenkins file (sample-pipeline.txt) for more details.
 
 6. **Jenkins Pipeline Configuration**:
-   - When creating the Jenkins pipeline, ensure to select "This project is parameterized".
-   - For the `action` parameter, provide the following choices:
+   - Logon to Jenkins
+   - Choose "Create a new Item"
+   - Choose "Pipeline" and add a name
+   - Scroll down and select "This project is parameterized", then "Choice Parameter" and fill accordingly:
+   - For name choose `action` (lowercase!!!), then in "Choices" copy below:
      - plan
      - apply --auto-approve
      - destroy --auto-approve
      - state show (Provide Terraform resource name here)
      - state list
+   - On the bottom choose "pipeline script" and copy content of sample-pipeline.txt
+   - Click Save
+ 
+7. **Jenkins Pipeline usage**
+
+    - Open newly created Jenkins project
+    - Choose Build with Parameters
+    - Choose "plan" as action
+    - Hit "Build"
+    - Wait till "plan" build will finish
+    - Review Console Output
+    - Choose Build with Parameters
+    - Choose "apply --auto-approve" as action
+    - Hit "Build"
+    - Wait till "plan" build will finish
+    - Review Console Output
+    - Confirm that S3 bucket and DynamoDB are build
 
 ## Contributing
 
