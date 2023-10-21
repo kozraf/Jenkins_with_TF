@@ -47,7 +47,7 @@ K8 cluster - read further.
      ```bash
      environment {
          // Load AWS credentials
-         AWS_CREDENTIALS = credentials('creds_ID_from_step_2')
+         AWS_CREDENTIALS = credentials('creds_ID_from_previous_step')
      }
      ```
    - Check the provided Jenkins file (sample-pipeline.txt) for more details.
