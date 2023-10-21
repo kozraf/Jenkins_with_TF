@@ -87,5 +87,5 @@ Feel free to raise issues or submit pull requests if you find areas of improveme
 
 ## License
 
-The scripts, configurations, and documentation in this project are licensed under the MIT License. This license applies only to the scripts, configurations, and documentation contained in this repository and not to the software they interact with. 
+The scripts, configurations, and documentation in this project are licensed under the MIT License. This license applies only to the scripts, configurations, and documentation contained in this repository and not to the software they interact with.
 
